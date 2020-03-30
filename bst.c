@@ -5,7 +5,7 @@
 #include <signal.h>
 #include <time.h>
 
-unsigned int ns[] = { 10, /* TODO: fill values which will be used as lists' sizes */ };
+unsigned int ns[] = { 10, 100, 20000/* TODO: fill values which will be used as lists' sizes */ };
 
 // each tree node contains an integer key and pointers to left and right children nodes
 struct node {
@@ -18,28 +18,87 @@ struct node {
 struct node *root = NULL;
 
 struct node **tree_search(struct node **candidate, int value) {
-    // TODO: implement
+    if (value < (**candidate).key)                                    // jesli wartość value jest mniejsza od key kandydata wartości
+        {
+        return tree_search((**candidate).left, value);                // zwroc kandydata na lewo 
+        }
+    if (value > (**candidate).key)                                    // jesli wartość value jest większa od key kandydata wartości
+        {
+        return tree_search((**candidate).right, value);               // zwroc kandydata na prawo
+        }
+    return candidate;                                                 // zwroc kandydata
     return NULL;
 }
 
+struct node **candidate;                                              // tworze obiekt struktury candidate
+struct node *createNode;                                              // tworze obiekt struktury createNode
+
 struct node* tree_insert(int value) {
-    // TODO: implement
+    candidate = tree_search(&root, value);                            // ustawiam kandydata na tree search z argumentem jako korzeniem
+    createNode->key = value;                                          // ustawiam key od createNode na wartość value
+    createNode->right = NULL;                                         // createNode na prawo ustawiam jako zero
+    createNode->left = NULL;                                          // createNode na lewo ustawiam jako zero
+    *candidate = createNode;                                          // wartość kandydata ustawiam jako createNode
     return NULL;
 }
 
 
 
 struct node **tree_maximum(struct node **candidate) {
-    // TODO: implement
+    if ((**candidate).right != NULL)                                  // jesli kandydat na prawo nie jest zerem
+        {
+        return tree_maximum((**candidate).right);                     // zwroc tree maximum gdzie argumentem jest kandydat na prawo
+        }
+    return candidate;                                                 // zwroc kandydata
     return NULL;
 }
 
 void tree_delete(int value) {
-    // TODO: implement
+    candidate = tree_search(&root, value);                                   
+    if (((**candidate).left = NULL) && ((**candidate).right = NULL))
+        {
+        *candidate = NULL;
+        }
+    else if (((**candidate).left != NULL) && ((**candidate).right = NULL))
+        {
+        *candidate = (**candidate).left;
+        }
+    else if (((**candidate).left = NULL) && ((**candidate).right != NULL))
+        {
+        *candidate = (**candidate).right;
+        }
+    else
+        {
+        struct node **maxcandidate;
+        maxcandidate = tree_maximum((**candidate).left);
+        (**candidate).key = (**maxcandidate).key;
+        *maxcandidate = (**maxcandidate).left;
+        }
 }
 
 unsigned int tree_size(struct node *element) {
-    // TODO: implement
+    int x = 1;
+    int y = 1;
+    while(element != NULL)
+    {
+        if(element->key != NULL) 
+            x++;
+        if(element->key == NULL)
+            element = element->left;
+    }
+
+
+    while(element != NULL)
+    {
+        if(element->key != NULL) 
+            y++;
+        if(element->key == NULL)
+            element = element->right;
+    }
+
+       int a = x + y;
+       printf("%d\t",a);
+
     return 0;
 }
 
