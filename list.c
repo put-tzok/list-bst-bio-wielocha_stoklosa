@@ -17,8 +17,8 @@ struct node *head = NULL;
 
 struct node* list_insert(int value) {
     struct node *createNode = malloc(sizeof(createNode));    // tworze dynamicznie obiekt
-    createNode->key = value;                                 // key od createNode ustawiam na wartosc value
-    createNode->next = head;                                 // nastepny element po createNode jest ustawiony jako glowa, dzieki czemu bedzie na poczatku listy
+    (*createNode).key = value;                                 // key od createNode ustawiam na wartosc value
+    (*createNode).next = head;                                 // nastepny element po createNode jest ustawiony jako glowa, dzieki czemu bedzie na poczatku listy
     head = createNode;                                       // ustawiam glowe na pierwszy element listy czyli createNode
     return createNode;
 }
