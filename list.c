@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-unsigned int ns[] = { 10, /* TODO: fill values which will be used as lists' sizes */ };
+unsigned int ns[] = { 10, 100, 1000/* TODO: fill values which will be used as lists' sizes */ };
 
 // each list node contains an integer key value and pointer to next list node
 struct node {
@@ -15,23 +15,51 @@ struct node {
 // list's beginning is called the head of list
 struct node *head = NULL;
 
+struct node *createNode;                     // tworzę obiekt struktury createNode
 
 struct node* list_insert(int value) {
-    // TODO: implement
+    createNode->key = value;                 // key ustawiam na wartość
+    createNode->next = head;                 // następny element po createNode ustawiam na głowe, więc mój createNode jest przed głową, czyli na początku listy
+    head = createNode;                       // ustawiam, że teraz moją głową jest createNode, czyli pierwszy element listy
     return NULL;
 }
 
+struct node *p;                              // tworzę nowy obiekt strukty p
+
 struct node* list_search(int value) {
-    // TODO: implement
+    p = head;                                // p ustawiam jako głowe, czyli pierwszy element listy
+    while (p != NULL && (*p).key != value)   // podczas gdy p nie jest zerem i key od p nie jest wartością value 
+        p = (*p).next;                       // przeskakuj na następny element listy
+    return p;                                // zwróć p
     return NULL;
 }
 
 void list_delete(int value) {
-    // TODO: implement
+    if((*head).key = value){                    // jeśli key od glowy jest wartością value
+        head = (*head).next;}                   // przeskakuj na następny element listy
+    else                                        // w innym przypadku
+    {                               
+        struct node *prev = head;               // tworzę nowy obiekt struktury prev i ustawiam go jako głowę
+        p = (*head).next;                       // ustawiam p jako następny element od głowy
+        while(p != NULL && (*p).key != value)   // podczas gdy p nie jest zerem i key od p nie jest wartością value
+        {             
+            prev = p;                           // ustawiam prev jako p
+            p = (*p).next;                      // p przeskakuje na następny element listy
+        }
+        if (p != NULL){                         // jeśli w tym else jeszcze moje p nie jest tylko zerem
+            (*prev).next = (*p).next;}          // ustawiam następny element od prev na następny element od p
+    }
 }
 
 unsigned int list_size() {
-    // TODO: implement
+    int size = 0;                               // tworze inta size(rozmiar) i ustawiam jako 0
+    p = head;                                   // ustawiam moje p jako głowę
+    while(p != NULL)                            // podczas gdy p nie jest zerem
+    {                           
+        size = size + 1;                        // moj size(rozmiar) zwiększa się o 1
+        p = (*p).next;                          // moje p przeskakuje na kolejny element listy
+    }
+    return size;                                // zwracam size(rozmiar)
     return 0;
 }
 
