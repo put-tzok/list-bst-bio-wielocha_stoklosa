@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-unsigned int ns[] = { 10, 100, 1000/* TODO: fill values which will be used as lists' sizes */ };
+unsigned int ns[] = { 1000, 20000, 30000, 40000/* TODO: fill values which will be used as lists' sizes */ };
 
 // each list node contains an integer key value and pointer to next list node
 struct node {
@@ -15,48 +15,47 @@ struct node {
 // list's beginning is called the head of list
 struct node *head = NULL;
 
-struct node *createNode;                     // tworzę obiekt struktury createNode
-
 struct node* list_insert(int value) {
-    createNode->key = value;                 // key ustawiam na wartość
-    createNode->next = head;                 // następny element po createNode ustawiam na głowe, więc mój createNode jest przed głową, czyli na początku listy
-    head = createNode;                       // ustawiam, że teraz moją głową jest createNode, czyli pierwszy element listy
-    return NULL;
+    struct node *createNode = malloc(sizeof(createNode));    // tworze dynamicznie obiekt
+    createNode->key = value;                                 // key od createNode ustawiam na wartosc value
+    createNode->next = head;                                 // nastepny element po createNode jest ustawiony jako glowa, dzieki czemu bedzie na poczatku listy
+    head = createNode;                                       // ustawiam glowe na pierwszy element listy czyli createNode
+    return createNode;
 }
 
-struct node *p;                              // tworzę nowy obiekt strukty p
+struct node *p;                              // tworzê nowy obiekt strukty p
 
 struct node* list_search(int value) {
-    p = head;                                // p ustawiam jako głowe, czyli pierwszy element listy
-    while (p != NULL && (*p).key != value)   // podczas gdy p nie jest zerem i key od p nie jest wartością value 
-        p = (*p).next;                       // przeskakuj na następny element listy
-    return p;                                // zwróć p
+    p = head;                                // p ustawiam jako g³owe, czyli pierwszy element listy
+    while (p != NULL && (*p).key != value)   // podczas gdy p nie jest zerem i key od p nie jest wartoœci¹ value
+        p = (*p).next;                       // przeskakuj na nastêpny element listy
+    return p;                                // zwróæ p
     return NULL;
 }
 
 void list_delete(int value) {
-    if((*head).key = value){                    // jeśli key od glowy jest wartością value
-        head = (*head).next;}                   // przeskakuj na następny element listy
+    if((*head).key = value){                    // jeœli key od glowy jest wartoœci¹ value
+        head = (*head).next;}                   // przeskakuj na nastêpny element listy
     else                                        // w innym przypadku
-    {                               
-        struct node *prev = head;               // tworzę nowy obiekt struktury prev i ustawiam go jako głowę
-        p = (*head).next;                       // ustawiam p jako następny element od głowy
-        while(p != NULL && (*p).key != value)   // podczas gdy p nie jest zerem i key od p nie jest wartością value
-        {             
+    {
+        struct node *prev = head;               // tworzê nowy obiekt struktury prev i ustawiam go jako g³owê
+        p = (*head).next;                       // ustawiam p jako nastêpny element od g³owy
+        while(p != NULL && (*p).key != value)   // podczas gdy p nie jest zerem i key od p nie jest wartoœci¹ value
+        {
             prev = p;                           // ustawiam prev jako p
-            p = (*p).next;                      // p przeskakuje na następny element listy
+            p = (*p).next;                      // p przeskakuje na nastêpny element listy
         }
-        if (p != NULL){                         // jeśli w tym else jeszcze moje p nie jest tylko zerem
-            (*prev).next = (*p).next;}          // ustawiam następny element od prev na następny element od p
+        if (p != NULL){                         // jeœli w tym else jeszcze moje p nie jest tylko zerem
+            (*prev).next = (*p).next;}          // ustawiam nastêpny element od prev na nastêpny element od p
     }
 }
 
 unsigned int list_size() {
     int size = 0;                               // tworze inta size(rozmiar) i ustawiam jako 0
-    p = head;                                   // ustawiam moje p jako głowę
+    p = head;                                   // ustawiam moje p jako g³owê
     while(p != NULL)                            // podczas gdy p nie jest zerem
-    {                           
-        size = size + 1;                        // moj size(rozmiar) zwiększa się o 1
+    {
+        size = size + 1;                        // moj size(rozmiar) zwiêksza siê o 1
         p = (*p).next;                          // moje p przeskakuje na kolejny element listy
     }
     return size;                                // zwracam size(rozmiar)
