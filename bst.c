@@ -18,27 +18,31 @@ struct node {
 struct node *root = NULL;
 
 struct node **tree_search(struct node **candidate, int value) {
-    if (value < (**candidate).key)                                    // jesli wartość value jest mniejsza od key kandydata wartości
+    if(*candidate == NULL)
         {
-        return tree_search((**candidate).left, value);                // zwroc kandydata na lewo 
+        return candidate;
         }
-    if (value > (**candidate).key)                                    // jesli wartość value jest większa od key kandydata wartości
+    if (value < (**candidate).key)                                    // jesli wartoœæ value jest mniejsza od key kandydata wartoœci
         {
-        return tree_search((**candidate).right, value);               // zwroc kandydata na prawo
+        return tree_search(&(**candidate).left, value);                // zwroc kandydata na lewo
         }
-    return candidate;                                                 // zwroc kandydata
+    if (value > (**candidate).key)                                    // jesli wartoœæ value jest wiêksza od key kandydata wartoœci
+        {
+        return tree_search(&(**candidate).right, value);               // zwroc kandydata na prawo
+        }
+    return candidate;                                                // zwroc kandydata
     return NULL;
 }
 
 struct node **candidate;                                              // tworze obiekt struktury candidate
-struct node *createNode;                                              // tworze obiekt struktury createNode
 
 struct node* tree_insert(int value) {
-    candidate = tree_search(&root, value);                            // ustawiam kandydata na tree search z argumentem jako korzeniem
-    createNode->key = value;                                          // ustawiam key od createNode na wartość value
-    createNode->right = NULL;                                         // createNode na prawo ustawiam jako zero
-    createNode->left = NULL;                                          // createNode na lewo ustawiam jako zero
-    *candidate = createNode;                                          // wartość kandydata ustawiam jako createNode
+    candidate = tree_search(&root, value);                              // ustawiam kandydata na tree search z argumentem jako korzeniem
+    struct node *createNode = malloc(sizeof(createNode));
+    (*createNode).key = value;                                          // ustawiam key od createNode na wartoœæ value
+    (*createNode).right = NULL;                                         // createNode na prawo ustawiam jako zero
+    (*createNode).left = NULL;                                          // createNode na lewo ustawiam jako zero
+    *candidate = createNode;                                          // wartoœæ kandydata ustawiam jako createNode
     return NULL;
 }
 
@@ -47,14 +51,14 @@ struct node* tree_insert(int value) {
 struct node **tree_maximum(struct node **candidate) {
     if ((**candidate).right != NULL)                                  // jesli kandydat na prawo nie jest zerem
         {
-        return tree_maximum((**candidate).right);                     // zwroc tree maximum gdzie argumentem jest kandydat na prawo
+        return tree_maximum(&(**candidate).right);                     // zwroc tree maximum gdzie argumentem jest kandydat na prawo
         }
     return candidate;                                                 // zwroc kandydata
     return NULL;
 }
 
 void tree_delete(int value) {
-    candidate = tree_search(&root, value);                                   
+    candidate = tree_search(&root, value);
     if (((**candidate).left = NULL) && ((**candidate).right = NULL))
         {
         *candidate = NULL;
@@ -70,36 +74,22 @@ void tree_delete(int value) {
     else
         {
         struct node **maxcandidate;
-        maxcandidate = tree_maximum((**candidate).left);
+        maxcandidate = tree_maximum(&(**candidate).left);
         (**candidate).key = (**maxcandidate).key;
         *maxcandidate = (**maxcandidate).left;
         }
 }
 
 unsigned int tree_size(struct node *element) {
-    int x = 1;
-    int y = 1;
-    while(element != NULL)
-    {
-        if(element->key != NULL) 
-            x++;
-        if(element->key == NULL)
-            element = element->left;
-    }
-
-
-    while(element != NULL)
-    {
-        if(element->key != NULL) 
-            y++;
-        if(element->key == NULL)
-            element = element->right;
-    }
-
-       int a = x + y;
-       printf("%d\t",a);
-
+  if(element = NULL)
+  {
     return 0;
+  }
+  else
+  {
+    return 1 + tree_size(&(*element).left) + tree_size(&(*element).right);
+    return 0;
+  }
 }
 
 /*
@@ -177,9 +167,26 @@ void insert_random(int *t, int n) {
     }
 }
 
-void insert_binary(int *t, int n) {
-    // TODO: implement
+void insert_binary(int *t, int p, int r) {
+    if(p = r)
+    {
+        tree_insert(t[p]);
+    }
+    int liczba = r-p;
+    if(liczba = 1)
+    {
+        tree_insert(t[p]);
+        tree_insert(t[r]);
+    }
+    else
+    {
+        int q = p + (r - p)/2;
+        tree_insert(t[q]);
+        tree_insert_biject(t, p, q-1);
+        tree_insert_biject(t, q+1, r);
+    }
 }
+
 
 char *insert_names[] = { "Increasing", "Random", "Binary" };
 void (*insert_functions[])(int*, int) = { insert_increasing, insert_random, insert_binary };
