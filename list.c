@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-unsigned int ns[] = { 1000, 20000, 30000, 40000/* TODO: fill values which will be used as lists' sizes */ };
+unsigned int ns[] = { 1230, 2340, 3450, 4560, 5670, 6780, 7890, 8910, 9120/* TODO: fill values which will be used as lists' sizes */ };
 
 // each list node contains an integer key value and pointer to next list node
 struct node {
@@ -16,11 +16,12 @@ struct node {
 struct node *head = NULL;
 
 struct node* list_insert(int value) {
-    struct node *createNode = malloc(sizeof(createNode));    // tworze dynamicznie obiekt
-    (*createNode).key = value;                                 // key od createNode ustawiam na wartosc value
-    (*createNode).next = head;                                 // nastepny element po createNode jest ustawiony jako glowa, dzieki czemu bedzie na poczatku listy
+    struct node *createNode = malloc(sizeof(*createNode));    // tworze miejsce dla obiektu
+    createNode->key = value;                                 // key od createNode ustawiam na wartosc value
+    createNode->next = head;                                 // nastepny element po createNode jest ustawiony jako glowa, dzieki czemu bedzie na poczatku listy
     head = createNode;                                       // ustawiam glowe na pierwszy element listy czyli createNode
     return createNode;
+    return NULL;
 }
 
 struct node *p;                              // tworzê nowy obiekt strukty p
@@ -34,7 +35,7 @@ struct node* list_search(int value) {
 }
 
 void list_delete(int value) {
-    if((*head).key = value){                    // jeœli key od glowy jest wartoœci¹ value
+    if((*head).key == value){                    // jeœli key od glowy jest wartoœci¹ value
         head = (*head).next;}                   // przeskakuj na nastêpny element listy
     else                                        // w innym przypadku
     {
