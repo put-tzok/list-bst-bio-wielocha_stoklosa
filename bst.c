@@ -5,7 +5,7 @@
 #include <signal.h>
 #include <time.h>
 
-unsigned int ns[] = { 10, 100, 200/* TODO: fill values which will be used as lists' sizes */ };
+unsigned int ns[] = { 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000/* TODO: fill values which will be used as lists' sizes */ };
 
 // each tree node contains an integer key and pointers to left and right children nodes
 struct node {
@@ -18,7 +18,7 @@ struct node {
 struct node *root = NULL;
 
 struct node **tree_search(struct node **candidate, int value) {
-    if(*candidate = NULL)
+    if(*candidate == NULL)
         {
         return candidate;
         }
@@ -67,7 +67,7 @@ void tree_delete(int value) {
         {
         *candidate = (**candidate).left;
         }
-    else if (((**candidate).left = NULL) && ((**candidate).right != NULL))
+    else if (((**candidate).left == NULL) && ((**candidate).right != NULL))
         {
         *candidate = (**candidate).right;
         }
@@ -87,7 +87,7 @@ unsigned int tree_size(struct node *element) {
   }
   else
   {
-    return 1 + tree_size(&(*element).left) + tree_size(&(*element).right);
+    return 1 + tree_size((*element).left) + tree_size((*element).right);
     return 0;
   }
 }
@@ -189,7 +189,7 @@ void tree_insert_biject(int *t, int p, int r) {
 }
 
 void insert_binary(int *t, int n){
-    tree_insert_biject(&t, 0, n-1);
+    tree_insert_biject(t, 0, n-1);
 }
 
 
