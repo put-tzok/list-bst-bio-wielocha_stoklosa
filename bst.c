@@ -5,7 +5,7 @@
 #include <signal.h>
 #include <time.h>
 
-unsigned int ns[] = { 10, 100, 20000/* TODO: fill values which will be used as lists' sizes */ };
+unsigned int ns[] = { 10, 100, 200/* TODO: fill values which will be used as lists' sizes */ };
 
 // each tree node contains an integer key and pointers to left and right children nodes
 struct node {
@@ -18,7 +18,7 @@ struct node {
 struct node *root = NULL;
 
 struct node **tree_search(struct node **candidate, int value) {
-    if(*candidate == NULL)
+    if(*candidate = NULL)
         {
         return candidate;
         }
@@ -38,7 +38,7 @@ struct node **candidate;                                              // tworze 
 
 struct node* tree_insert(int value) {
     candidate = tree_search(&root, value);                              // ustawiam kandydata na tree search z argumentem jako korzeniem
-    struct node *createNode = malloc(sizeof(createNode));
+    struct node *createNode = malloc(sizeof(*createNode));
     (*createNode).key = value;                                          // ustawiam key od createNode na wartoœæ value
     (*createNode).right = NULL;                                         // createNode na prawo ustawiam jako zero
     (*createNode).left = NULL;                                          // createNode na lewo ustawiam jako zero
@@ -59,11 +59,11 @@ struct node **tree_maximum(struct node **candidate) {
 
 void tree_delete(int value) {
     candidate = tree_search(&root, value);
-    if (((**candidate).left = NULL) && ((**candidate).right = NULL))
+    if (((**candidate).left == NULL) && ((**candidate).right == NULL))
         {
         *candidate = NULL;
         }
-    else if (((**candidate).left != NULL) && ((**candidate).right = NULL))
+    else if (((**candidate).left != NULL) && ((**candidate).right == NULL))
         {
         *candidate = (**candidate).left;
         }
@@ -81,7 +81,7 @@ void tree_delete(int value) {
 }
 
 unsigned int tree_size(struct node *element) {
-  if(element = NULL)
+  if(element == NULL)
   {
     return 0;
   }
@@ -167,13 +167,14 @@ void insert_random(int *t, int n) {
     }
 }
 
-void insert_binary(int *t, int p, int r) {
-    if(p = r)
+
+void tree_insert_biject(int *t, int p, int r) {
+    if(p == r)
     {
         tree_insert(t[p]);
     }
-    int liczba = r-p;
-    if(liczba = 1)
+
+    else if(r-p == 1)
     {
         tree_insert(t[p]);
         tree_insert(t[r]);
@@ -185,6 +186,10 @@ void insert_binary(int *t, int p, int r) {
         tree_insert_biject(t, p, q-1);
         tree_insert_biject(t, q+1, r);
     }
+}
+
+void insert_binary(int *t, int n){
+    tree_insert_biject(&t, 0, n-1);
 }
 
 
