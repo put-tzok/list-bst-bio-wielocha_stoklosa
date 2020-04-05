@@ -4,19 +4,19 @@
 #include <stdlib.h>
 #include <time.h>
 
-unsigned int ns[] = { 1230, 2340, 3450, 4560, 5670, 6780, 7890, 8910, 9120/* TODO: fill values which will be used as lists' sizes */ };
+unsigned int ns[] = { 500, 1000, 2500, 5000, 7500, 10000, 15000, 20000, 25000, 30000 };
 
-// each list node contains an integer key value and pointer to next list node
+
 struct node {
     int key;
     struct node *next;
 };
 
-// list's beginning is called the head of list
+
 struct node *head = NULL;
 
 struct node* list_insert(int value) {
-    struct node *createNode = malloc(sizeof(*createNode));    // tworze miejsce dla obiektu
+    struct node *createNode = malloc(sizeof(*createNode));    // tworze dynamicznie obiekt
     createNode->key = value;                                 // key od createNode ustawiam na wartosc value
     createNode->next = head;                                 // nastepny element po createNode jest ustawiony jako glowa, dzieki czemu bedzie na poczatku listy
     head = createNode;                                       // ustawiam glowe na pierwszy element listy czyli createNode
