@@ -5,16 +5,15 @@
 #include <signal.h>
 #include <time.h>
 
-unsigned int ns[] = { 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000/* TODO: fill values which will be used as lists' sizes */ };
+unsigned int ns[] = { 500, 1000, 2500, 5000, 7500, 10000, 15000, 20000, 25000, 30000};
 
-// each tree node contains an integer key and pointers to left and right children nodes
+
 struct node {
     int key;
     struct node *left;
     struct node *right;
 };
 
-// tree's beginning is called the root
 struct node *root = NULL;
 
 struct node **tree_search(struct node **candidate, int value) {
@@ -58,7 +57,7 @@ struct node **tree_maximum(struct node **candidate) {
 }
 
 void tree_delete(int value) {
-    candidate = tree_search(&root, value);
+    candidate = tree_search(&root, value);                                       // najpierw sortowanie drzewka z korzeniem
     if (((**candidate).left == NULL) && ((**candidate).right == NULL))
         {
         *candidate = NULL;
